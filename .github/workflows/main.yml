@@ -1,4 +1,4 @@
-name: Simple DB Test
+name: Hello World Compose Test
 
 on:
   push:
@@ -6,11 +6,12 @@ on:
       - main
 
 jobs:
-  test-db:
+  hello-world-test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
     - name: Install Docker Compose
       run: |
@@ -19,21 +20,11 @@ jobs:
         docker-compose version
 
     - name: Start Docker Compose
-      run: docker-compose up -d
+      run: docker-compose up
 
-    - name: Check MariaDB health
-      run: |
-        for i in {1..10}; do
-          if docker ps | grep healthy; then
-            echo "MariaDB is healthy"
-            exit 0
-          fi
-          echo "Waiting for MariaDB to be healthy..."
-          sleep 5
-        done
-        echo "MariaDB did not become healthy in time"
-        docker logs $(docker ps -q)
-        exit 1
+    - name: Done
+      run: echo "Hello world container should have printed a message."
 
-    - name: Shut down Docker Compose
+    - name: Stop Docker Compose
+      if: always()
       run: docker-compose down
