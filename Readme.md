@@ -24,11 +24,11 @@ Kurze Beschreibung des Projekts:
 
 ## 👥 Team
 
-| Name            | Aufgabe / Rolle                   |
-|-----------------|-----------------------------------|
-| Panat Ruangsri  | Frontend / Backend + Scrum Master |
-| Anna Beispiel   | Frontend / Backend / Slave        |
-|                 |                                   |
+| Name                | Aufgabe / Rolle                   |
+|---------------------|-----------------------------------|
+| Panat Ruangsri      | Frontend / Backend + Scrum Master |
+| Timo Eichenberger   | Frontend / Backend / Slave        |
+|                     |                                   |
 
 ---
 
