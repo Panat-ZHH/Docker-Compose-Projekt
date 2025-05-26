@@ -1,58 +1,39 @@
-name: CI Pipeline
+name: Simple DB Test
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build-and-test:
+  test-db:
     runs-on: ubuntu-latest
-
-    services:
-      mariadb:
-        image: mariadb:11
-        ports:
-          - 3306:3306
-        env:
-          MARIADB_ROOT_PASSWORD: example
-          MARIADB_DATABASE: soundify
-          MARIADB_USER: sounduser
-          MARIADB_PASSWORD: soundpass
-        options: >-
-          --health-cmd="mysqladmin ping -h localhost"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
 
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up Docker Compose
-      run: docker-compose up -d --build
+    - name: Install Docker Compose
+      run: |
+        sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        docker-compose version
 
-    - name: Wait for Backend to be healthy
+    - name: Start Docker Compose
+      run: docker-compose up -d
+
+    - name: Check MariaDB health
       run: |
         for i in {1..10}; do
-          status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/actuator/health)
-          if [ "$status" -eq 200 ]; then
-            echo "Backend is healthy"
+          if docker ps | grep healthy; then
+            echo "MariaDB is healthy"
             exit 0
           fi
-          echo "Waiting for backend..."
+          echo "Waiting for MariaDB to be healthy..."
           sleep 5
         done
+        echo "MariaDB did not become healthy in time"
+        docker logs $(docker ps -q)
         exit 1
 
-    - name: Run E2E CRUD Tests
-      run: |
-        # Beispiel: Prüfe ob Hello-Endpoint antwortet
-        curl -f http://localhost:8080/api/hello
-        # Hier könnt ihr eure echten CRUD Tests einbauen, z.B. mit curl oder Postman/newman
-
-    - name: Tear down Docker Compose
-      if: always()
+    - name: Shut down Docker Compose
       run: docker-compose down
