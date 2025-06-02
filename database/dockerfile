@@ -1,20 +1,14 @@
 FROM mariadb:latest
 
-# Copy custom configuration if needed
-# COPY my.cnf /etc/mysql/conf.d/
-
-# Environment variables set during build time
-ENV MYSQL_ROOT_PASSWORD=root
-ENV MYSQL_DATABASE=Soundify
-ENV MYSQL_USER=Soundify
-ENV MYSQL_PASSWORD=Soundify
+# Environment variables are better set in docker-compose.yaml
+# as they're already defined there
 
 # Copy initialization SQL script
 COPY init.sql /docker-entrypoint-initdb.d/
 
-# Healthcheck to verify database is working
-HEALTHCHECK --interval=10s --timeout=20s --retries=10 --start-period=30s \
-    CMD mysql -h localhost -uroot -proot -e "SELECT 1" || exit 1
-
 # Expose MySQL port
 EXPOSE 3306
+
+# Custom healthcheck that works more reliably
+HEALTHCHECK --interval=5s --timeout=5s --retries=3 \
+    CMD mysqladmin ping -h localhost -u root -proot || exit 1
