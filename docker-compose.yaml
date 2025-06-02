@@ -1,3 +1,40 @@
+version: "3.8"
 services:
-  hello_world:
-    image: hello-world
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: Soundify
+      MYSQL_USER: Soundify
+      MYSQL_PASSWORD: Soundify
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+
+    healthcheck:
+      test:
+        ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpass"]
+      interval: 10s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend/backend
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/soundify
+      SPRING_DATASOURCE_USERNAME: sounduser
+      SPRING_DATASOURCE_PASSWORD: soundpass
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
