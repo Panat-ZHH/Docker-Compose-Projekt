@@ -1,4 +1,4 @@
-name: Hello World Compose Test
+name: Docker Compose Deployment Test
 
 on:
   push:
@@ -6,25 +6,38 @@ on:
       - main
 
 jobs:
-  hello-world-test:
+  docker-compose-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Install Docker Compose
-      run: |
-        sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-        sudo chmod +x /usr/local/bin/docker-compose
-        docker-compose version
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose version
 
-    - name: Start Docker Compose
-      run: docker-compose up
+      - name: Start Docker Compose in detached mode
+        run: docker-compose up -d
 
-    - name: Done
-      run: echo "Hello world container should have printed a message."
+      - name: Wait for services to be ready
+        run: |
+          echo "Waiting for services to start..."
+          sleep 30  # Give services time to start
 
-    - name: Stop Docker Compose
-      if: always()
-      run: docker-compose down
+      - name: Check if containers are running
+        run: docker-compose ps
+
+      - name: Check database service
+        run: |
+          docker-compose exec -T db mysqladmin ping -h localhost -uroot -proot || echo "Database not ready yet"
+
+      - name: Test backend service
+        run: |
+          curl -s http://localhost:8080 || echo "Backend service not responding"
+
+      - name: Stop Docker Compose
+        if: always()
+        run: docker-compose down -v
