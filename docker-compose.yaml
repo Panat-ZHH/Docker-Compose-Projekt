@@ -1,12 +1,7 @@
 version: "3.8"
 services:
   db:
-<<<<<<< HEAD
     image: mariadb:latest
-=======
-    build:
-      context: ./database
->>>>>>> 0d9f94c9bf0c9adf0d5a243d9cae1b0e9e7e43f9
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: Soundify
@@ -14,7 +9,6 @@ services:
       MYSQL_PASSWORD: Soundify
     volumes:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-<<<<<<< HEAD
     ports:
       - "3306:3306"
 
@@ -23,24 +17,11 @@ services:
         ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpass"]
       interval: 10s
       retries: 5
-=======
-      - db-data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    restart: always
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-      start_period: 30s
->>>>>>> 0d9f94c9bf0c9adf0d5a243d9cae1b0e9e7e43f9
 
   backend:
     build:
       context: ./backend/backend
     depends_on:
-<<<<<<< HEAD
       db:
         condition: service_healthy
     ports:
@@ -49,16 +30,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/soundify
       SPRING_DATASOURCE_USERNAME: sounduser
       SPRING_DATASOURCE_PASSWORD: soundpass
-=======
-      - db
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/Soundify
-      SPRING_DATASOURCE_USERNAME: Soundify
-      SPRING_DATASOURCE_PASSWORD: Soundify
-    restart: always
->>>>>>> 0d9f94c9bf0c9adf0d5a243d9cae1b0e9e7e43f9
 
   frontend:
     build:
@@ -67,9 +38,3 @@ services:
       - "3000:80"
     depends_on:
       - backend
-<<<<<<< HEAD
-=======
-
-volumes:
-  db-data:
->>>>>>> 0d9f94c9bf0c9adf0d5a243d9cae1b0e9e7e43f9
