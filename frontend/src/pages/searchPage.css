@@ -1,0 +1,555 @@
+/* Cyber Search Page Grundstyles */
+.cyber-search-page {
+	background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 25%, #330066 50%, #1a0033 75%, #0a0a0a 100%);
+	background-size: 400% 400%;
+	animation: gradientShift 12s ease infinite;
+	min-height: 100vh;
+	color: white;
+	padding: 5rem 0;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Animierte Hintergrund-Partikel */
+.particle-field {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 1;
+}
+
+.particle {
+	position: absolute;
+	width: 2px;
+	height: 2px;
+	background: #00ffff;
+	border-radius: 50%;
+	animation: particleFloat 15s linear infinite;
+	box-shadow: 0 0 10px #00ffff;
+}
+
+.particle:nth-child(1) {
+	left: 10%;
+	animation-delay: 0s;
+	background: #ff0080;
+	box-shadow: 0 0 10px #ff0080;
+}
+
+.particle:nth-child(2) {
+	left: 20%;
+	animation-delay: 2s;
+	background: #00ffff;
+	box-shadow: 0 0 10px #00ffff;
+}
+
+.particle:nth-child(3) {
+	left: 40%;
+	animation-delay: 4s;
+	background: #ff8000;
+	box-shadow: 0 0 10px #ff8000;
+}
+
+.particle:nth-child(4) {
+	left: 60%;
+	animation-delay: 6s;
+	background: #8000ff;
+	box-shadow: 0 0 10px #8000ff;
+}
+
+.particle:nth-child(5) {
+	left: 80%;
+	animation-delay: 8s;
+	background: #00ff80;
+	box-shadow: 0 0 10px #00ff80;
+}
+
+.particle:nth-child(6) {
+	left: 90%;
+	animation-delay: 10s;
+	background: #ff0080;
+	box-shadow: 0 0 10px #ff0080;
+}
+
+/* Scan-Lines Effekt */
+.scan-lines {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: repeating-linear-gradient(
+		90deg,
+		transparent,
+		transparent 2px,
+		rgba(0, 255, 255, 0.03) 2px,
+		rgba(0, 255, 255, 0.03) 4px
+	);
+	animation: scanMove 5s linear infinite;
+	pointer-events: none;
+	z-index: 2;
+}
+
+/* Title Styles */
+.title-container {
+	position: relative;
+	z-index: 10;
+}
+
+.cyber-title {
+	font-size: 4rem;
+	font-weight: 900;
+	font-family: 'Courier New', monospace;
+	margin-bottom: 2rem;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.title-icon {
+	font-size: 4rem;
+	animation: iconRotate 8s linear infinite;
+	filter: drop-shadow(0 0 20px #00ffff);
+}
+
+.glitch-title {
+	position: relative;
+	color: #ffffff;
+	text-shadow: 0 0 10px #00ffff;
+	animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.glitch-title::before {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: #ff0080;
+	clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+	animation: glitchTop 2s infinite;
+}
+
+.glitch-title::after {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: #00ffff;
+	clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+	animation: glitchBottom 2s infinite;
+}
+
+.title-underline {
+	height: 4px;
+	background: linear-gradient(90deg, #ff0080, #00ffff, #ff8000, #8000ff);
+	background-size: 400% 100%;
+	animation: underlineFlow 3s linear infinite;
+	border-radius: 2px;
+	margin: 0 auto;
+	width: 200px;
+}
+
+/* Search Container */
+.search-container {
+	position: relative;
+	z-index: 10;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.search-glow-ring {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 120%;
+	height: 200px;
+	border: 2px solid transparent;
+	border-radius: 50px;
+	background: linear-gradient(45deg, #ff0080, #00ffff, #ff8000, #8000ff) border-box;
+	mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+	mask-composite: subtract;
+	animation: ringPulse 4s ease-in-out infinite;
+	z-index: -1;
+}
+
+.search-glow-ring-2 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 140%;
+	height: 220px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 60px;
+	animation: ringPulse 6s ease-in-out infinite reverse;
+	z-index: -2;
+}
+
+/* Input Styles */
+.input-wrapper {
+	position: relative;
+	width: 100%;
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+.cyber-input {
+	width: 100%;
+	height: 70px;
+	background: rgba(0, 0, 0, 0.8) !important;
+	border: 2px solid #333 !important;
+	border-radius: 35px !important;
+	color: #ffffff !important;
+	font-size: 1.2rem;
+	padding: 0 60px 0 30px !important;
+	font-family: 'Courier New', monospace;
+	backdrop-filter: blur(10px);
+	transition: all 0.3s ease;
+	box-shadow: 0 0 20px rgba(0, 255, 255, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.cyber-input::placeholder {
+	color: rgba(255, 255, 255, 0.5) !important;
+	font-style: italic;
+}
+
+.cyber-input:focus {
+	outline: none !important;
+	box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1) !important;
+	border-color: #00ffff !important;
+	background: rgba(0, 50, 50, 0.9) !important;
+}
+
+.cyber-input.focused {
+	transform: scale(1.02);
+}
+
+.cyber-input.has-value {
+	border-color: #ff0080 !important;
+	box-shadow: 0 0 30px rgba(255, 0, 128, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.input-border-effect {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 35px;
+	background: linear-gradient(45deg, #ff0080, #00ffff, #ff8000, #8000ff);
+	background-size: 400% 400%;
+	animation: borderFlow 4s linear infinite;
+	z-index: -1;
+	padding: 2px;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.cyber-input:focus + .input-border-effect {
+	opacity: 1;
+}
+
+.input-border-effect::after {
+	content: '';
+	position: absolute;
+	inset: 2px;
+	background: rgba(0, 0, 0, 0.8);
+	border-radius: 33px;
+}
+
+.input-particles {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 35px;
+	background-image: radial-gradient(1px 1px at 20px 30px, rgba(0, 255, 255, 0.8), transparent),
+		radial-gradient(1px 1px at 40px 70px, rgba(255, 0, 128, 0.8), transparent),
+		radial-gradient(1px 1px at 90px 40px, rgba(255, 128, 0, 0.8), transparent);
+	background-repeat: repeat;
+	background-size: 150px 150px;
+	animation: inputParticles 8s linear infinite;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.cyber-input:focus ~ .input-particles {
+	opacity: 1;
+}
+
+/* Holographic Search Icon */
+.search-icon-holo {
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #00ffff, #ff0080);
+	border-radius: 50%;
+	animation: iconHolo 3s ease-in-out infinite;
+}
+
+.search-icon-inner {
+	font-size: 1.5rem;
+	animation: iconSpin 4s linear infinite;
+}
+
+/* Search Suggestions */
+.search-suggestions {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 3rem;
+	flex-wrap: wrap;
+}
+
+.suggestion-item {
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 20px;
+	padding: 0.5rem 1rem;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
+	position: relative;
+	overflow: hidden;
+}
+
+.suggestion-item::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: left 0.5s ease;
+}
+
+.suggestion-item:hover::before {
+	left: 100%;
+}
+
+.suggestion-item:hover {
+	background: rgba(0, 255, 255, 0.2);
+	border-color: #00ffff;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+}
+
+/* Cyber Grid Pattern */
+.cyber-grid {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 200px;
+	background-image: linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+	background-size: 50px 50px;
+	animation: gridMove 10s linear infinite;
+	z-index: 1;
+}
+
+/* Keyframe Animationen */
+@keyframes gradientShift {
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+}
+
+@keyframes particleFloat {
+	0% {
+		transform: translateY(100vh) rotate(0deg);
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(-100px) rotate(360deg);
+		opacity: 0;
+	}
+}
+
+@keyframes scanMove {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes iconRotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes titleGlow {
+	0% {
+		text-shadow: 0 0 10px #00ffff;
+	}
+	100% {
+		text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+	}
+}
+
+@keyframes glitchTop {
+	2%,
+	64% {
+		transform: translate(2px, -2px);
+	}
+	4%,
+	60% {
+		transform: translate(-2px, 2px);
+	}
+	62% {
+		transform: translate(13px, -1px) skew(-13deg);
+	}
+}
+
+@keyframes glitchBottom {
+	2%,
+	64% {
+		transform: translate(-2px, 0px);
+	}
+	4%,
+	60% {
+		transform: translate(-2px, 0px);
+	}
+	62% {
+		transform: translate(-22px, 5px) skew(21deg);
+	}
+}
+
+@keyframes underlineFlow {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 400% 50%;
+	}
+}
+
+@keyframes ringPulse {
+	0%,
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 0.3;
+	}
+	50% {
+		transform: translate(-50%, -50%) scale(1.1);
+		opacity: 0.6;
+	}
+}
+
+@keyframes borderFlow {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 400% 50%;
+	}
+}
+
+@keyframes inputParticles {
+	0% {
+		transform: translateY(0px);
+	}
+	100% {
+		transform: translateY(-150px);
+	}
+}
+
+@keyframes iconHolo {
+	0%,
+	100% {
+		box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+	}
+	50% {
+		box-shadow: 0 0 40px rgba(255, 0, 128, 0.8);
+	}
+}
+
+@keyframes iconSpin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes gridMove {
+	0% {
+		transform: translateY(0px);
+	}
+	100% {
+		transform: translateY(50px);
+	}
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.cyber-title {
+		font-size: 2.5rem;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.title-icon {
+		font-size: 3rem;
+	}
+
+	.cyber-input {
+		height: 60px;
+		font-size: 1rem;
+		padding: 0 50px 0 20px !important;
+	}
+
+	.search-suggestions {
+		gap: 0.5rem;
+	}
+
+	.suggestion-item {
+		font-size: 0.8rem;
+		padding: 0.4rem 0.8rem;
+	}
+
+	.search-glow-ring {
+		width: 130%;
+		height: 180px;
+	}
+
+	.search-glow-ring-2 {
+		width: 150%;
+		height: 200px;
+	}
+}

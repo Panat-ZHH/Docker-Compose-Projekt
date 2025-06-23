@@ -1,15 +1,17 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
 import Header from './Components/header';
+import SearchPage from './pages/searchPage.jsx';
+import Playlist from './pages/playlist.jsx';
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
 		<>
-			<Header></Header>
+			<Header />
+			<Routes>
+				<Route path="/" element={<SearchPage />} />
+				<Route path="/search" element={<SearchPage />} />
+				<Route path="/playlist" element={<Playlist />} />
+			</Routes>
 		</>
 	);
 }

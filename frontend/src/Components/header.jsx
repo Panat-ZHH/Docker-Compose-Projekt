@@ -1,42 +1,42 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from '../assets/logo.png';
+import './Header.css'; // Custom CSS für zusätzliche Styles
 
 function Header() {
 	return (
-		<Navbar expand="lg" className="bg-dark">
-			<Container>
-				<Navbar.Brand href="#home" className="text-light">
-					Soundify
+		<Navbar expand="lg" className="cyber-header">
+			<div className="header-glow"></div>
+			<Container className="d-flex justify-content-between align-items-center position-relative">
+				{/* Left: Search Button */}
+				<Nav>
+					<Button as={Link} to="/search" className="cyber-btn cyber-btn-search d-flex align-items-center">
+						<span className="btn-icon pulse-icon">🔎</span>
+						<span className="btn-text glitch-text">SEARCH</span>
+						<div className="btn-particles"></div>
+					</Button>
+				</Nav>
+
+				{/* Center: Logo Image */}
+				<Navbar.Brand as={Link} to="/" className="logo-container">
+					<div className="logo-ring"></div>
+					<div className="logo-ring-2"></div>
+					<img src={logo} alt="Logo" className="logo-image floating-logo" />
+					<div className="logo-glow"></div>
 				</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="me-auto">
-						<Nav.Link href="#home" className="text-light">
-							Home
-						</Nav.Link>
-						<Nav.Link href="#link" className="text-light">
-							Link
-						</Nav.Link>
-						<NavDropdown title="Dropdown" id="basic-nav-dropdown" className="text-light">
-							<NavDropdown.Item href="#action/3.1" className="text-light">
-								Action
-							</NavDropdown.Item>
-							<NavDropdown.Item href="#action/3.2" className="text-light">
-								Another action
-							</NavDropdown.Item>
-							<NavDropdown.Item href="#action/3.3" className="text-light">
-								Something
-							</NavDropdown.Item>
-							<NavDropdown.Divider />
-							<NavDropdown.Item href="#action/3.4" className="text-light">
-								Separated link
-							</NavDropdown.Item>
-						</NavDropdown>
-					</Nav>
-				</Navbar.Collapse>
+
+				{/* Right: Playlist Button */}
+				<Nav>
+					<Button as={Link} to="/playlist" className="cyber-btn cyber-btn-playlist d-flex align-items-center">
+						<span className="btn-icon pulse-icon">🎶</span>
+						<span className="btn-text glitch-text">PLAYLIST</span>
+						<div className="btn-particles"></div>
+					</Button>
+				</Nav>
 			</Container>
 		</Navbar>
 	);
