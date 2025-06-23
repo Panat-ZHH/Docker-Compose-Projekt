@@ -4,19 +4,21 @@ services:
     image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: Soundify
-      MYSQL_USER: Soundify
-      MYSQL_PASSWORD: Soundify
+      MYSQL_DATABASE: soundify
+      MYSQL_USER: sounduser
+      MYSQL_PASSWORD: soundpass
     volumes:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
     healthcheck:
-      test:
-        ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpass"]
+      test: 
+        ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
-      retries: 5
+      timeout: 5s
+      retries: 10
+      start_period: 20s
 
   backend:
     build:
