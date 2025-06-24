@@ -1,0 +1,293 @@
+/* Login Page Background */
+.cyber-login-page {
+	min-height: 100vh;
+	background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 25%, #330066 50%, #1a0033 75%, #0a0a0a 100%);
+	position: relative;
+	overflow: hidden;
+}
+
+.login-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.grid-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+	background-size: 50px 50px;
+}
+
+.floating-particles {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: radial-gradient(2px 2px at 100px 50px, rgba(255, 0, 128, 0.3), transparent),
+		radial-gradient(1px 1px at 200px 150px, rgba(0, 255, 255, 0.3), transparent),
+		radial-gradient(2px 2px at 300px 250px, rgba(255, 128, 0, 0.3), transparent),
+		radial-gradient(1px 1px at 400px 100px, rgba(128, 0, 255, 0.3), transparent);
+	background-repeat: repeat;
+	background-size: 500px 300px;
+}
+
+.login-container {
+	position: relative;
+	z-index: 2;
+}
+
+/* Login Card Styles */
+.cyber-login-card {
+	background: rgba(10, 10, 10, 0.9);
+	border: none;
+	border-radius: 0;
+	position: relative;
+	overflow: hidden;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 0 50px rgba(0, 255, 255, 0.2), 0 0 100px rgba(255, 0, 128, 0.1),
+		inset 0 0 50px rgba(255, 255, 255, 0.05);
+}
+
+.card-glow {
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	right: -2px;
+	bottom: -2px;
+	z-index: -1;
+}
+
+.card-border {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(10, 10, 10, 0.95);
+	z-index: -1;
+}
+
+/* Title Styles */
+.cyber-title {
+	font-family: 'Courier New', monospace;
+	font-size: 2.5rem;
+	font-weight: 900;
+	color: #00ffff;
+	text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+	margin-bottom: 1rem;
+}
+
+.glitch-title {
+	position: relative;
+}
+
+.title-underline {
+	width: 100px;
+	height: 3px;
+	background: linear-gradient(90deg, #ff0080, #00ffff, #ff8000);
+	margin: 0 auto;
+}
+
+.cyber-subtitle {
+	color: rgba(255, 255, 255, 0.7);
+	font-family: 'Courier New', monospace;
+	font-size: 1rem;
+	letter-spacing: 1px;
+}
+
+/* Form Styles */
+.cyber-label {
+	color: #00ffff;
+	font-family: 'Courier New', monospace;
+	font-weight: 700;
+	font-size: 0.9rem;
+	letter-spacing: 1px;
+	margin-bottom: 0.8rem;
+	display: flex;
+	align-items: center;
+	text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+.label-icon {
+	margin-right: 0.8rem;
+	font-size: 1.1rem;
+}
+
+.cyber-input {
+	background: rgba(0, 0, 0, 0.8);
+	border: 2px solid transparent;
+	border-radius: 0;
+	color: #ffffff;
+	font-family: 'Courier New', monospace;
+	font-size: 1rem;
+	padding: 1rem 1.5rem;
+	position: relative;
+	transition: all 0.3s ease;
+	box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.cyber-input:focus {
+	background: rgba(0, 0, 0, 0.9);
+	border-color: #00ffff;
+	color: #ffffff;
+	box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.05);
+	outline: none;
+}
+
+.cyber-input::placeholder {
+	color: rgba(255, 255, 255, 0.4);
+	font-family: 'Courier New', monospace;
+}
+
+.input-glow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	border: 1px solid transparent;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.cyber-input:focus + .input-glow {
+	opacity: 1;
+}
+
+/* Button Styles */
+.cyber-btn-login-main {
+	background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%);
+	border: 2px solid transparent;
+	border-radius: 0;
+	padding: 1.2rem 2rem;
+	font-weight: 700;
+	font-size: 1.1rem;
+	color: white;
+	font-family: 'Courier New', monospace;
+	letter-spacing: 2px;
+	position: relative;
+	overflow: hidden;
+	clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+	transition: all 0.3s ease;
+	box-shadow: 0 0 30px rgba(0, 255, 255, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.cyber-btn-register {
+	background: linear-gradient(135deg, #ff0080 0%, #8000ff 100%);
+	border: 2px solid transparent;
+	border-radius: 0;
+	padding: 1.2rem 2rem;
+	font-weight: 700;
+	font-size: 1.1rem;
+	color: white;
+	font-family: 'Courier New', monospace;
+	letter-spacing: 2px;
+	position: relative;
+	overflow: hidden;
+	clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+	transition: all 0.3s ease;
+	box-shadow: 0 0 30px rgba(255, 0, 128, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.cyber-btn-login-main::before,
+.cyber-btn-register::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+	transition: left 0.6s ease;
+}
+
+.cyber-btn-login-main:hover::before,
+.cyber-btn-register:hover::before {
+	left: 100%;
+}
+
+.cyber-btn-login-main:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.1);
+	color: white;
+	background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%);
+}
+
+.cyber-btn-register:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 25px rgba(255, 0, 128, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.1);
+	color: white;
+	background: linear-gradient(135deg, #ff0080 0%, #8000ff 100%);
+}
+
+/* Button Content */
+.pulse-icon {
+	font-size: 1.3rem;
+	margin-right: 1rem;
+}
+
+.glitch-text {
+	position: relative;
+}
+
+.btn-particles {
+	display: none;
+}
+
+/* Footer Link */
+.cyber-link {
+	color: rgba(0, 255, 255, 0.8);
+	text-decoration: none;
+	font-family: 'Courier New', monospace;
+	font-size: 0.9rem;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+.cyber-link:hover {
+	color: #00ffff;
+	text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+	text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.cyber-title {
+		font-size: 2rem;
+	}
+
+	.cyber-btn-login-main,
+	.cyber-btn-register {
+		padding: 1rem 1.5rem;
+		font-size: 1rem;
+	}
+
+	.pulse-icon {
+		font-size: 1.1rem;
+		margin-right: 0.8rem;
+	}
+}
+
+@media (max-width: 576px) {
+	.cyber-title {
+		font-size: 1.8rem;
+	}
+
+	.p-5 {
+		padding: 2rem !important;
+	}
+
+	.cyber-input {
+		padding: 0.8rem 1.2rem;
+	}
+}

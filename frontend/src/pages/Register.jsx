@@ -1,35 +1,24 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './loginPage.css';
+import './register.css';
 
-function LoginPage({ onLogin }) {
+function RegisterPage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [error, setError] = useState('');
-	const navigate = useNavigate();
-
-	// Mock-Daten für Login
-	const MOCK_EMAIL = 'user@cyber.net';
-	const MOCK_PASSWORD = 'cyber1234';
-
-	const handleLogin = (e) => {
-		e.preventDefault();
-
-		// Prüfen, ob Email und Passwort stimmen
-		if (email === MOCK_EMAIL && password === MOCK_PASSWORD) {
-			setError('');
-			onLogin(); // Setzt Login-Status in App.jsx
-			navigate('/'); // Weiterleitung zur Startseite
-		} else {
-			setError('Invalid email or password.');
-		}
-	};
+	const [confirmPassword, setConfirmPassword] = useState('');
 
 	const handleRegister = (e) => {
 		e.preventDefault();
-		navigate('/register');
+
+		if (password !== confirmPassword) {
+			alert("Passwords don't match!");
+			return;
+		}
+
+		// Registrierung-Logik hier implementieren
+		console.log('Register attempt:', { email, password });
 	};
 
 	return (
@@ -47,19 +36,19 @@ function LoginPage({ onLogin }) {
 							<div className="card-border"></div>
 
 							<Card.Body className="p-5">
+								{/* Header */}
 								<div className="text-center mb-5">
 									<h1 className="cyber-title">
-										<span className="glitch-title" data-text="ACCESS TERMINAL">
-											ACCESS TERMINAL
+										<span className="glitch-title" data-text="USER REGISTRATION">
+											USER REGISTRATION
 										</span>
 									</h1>
 									<div className="title-underline"></div>
-									<p className="cyber-subtitle mt-3">Enter your credentials to proceed</p>
+									<p className="cyber-subtitle mt-3">Create your new cyber credentials</p>
 								</div>
 
-								{error && <div className="alert alert-danger text-center">{error}</div>}
-
-								<Form onSubmit={handleLogin}>
+								{/* Register Form */}
+								<Form onSubmit={handleRegister}>
 									<Form.Group className="mb-4">
 										<Form.Label className="cyber-label">
 											<span className="label-icon">📧</span>
@@ -76,7 +65,7 @@ function LoginPage({ onLogin }) {
 										<div className="input-glow"></div>
 									</Form.Group>
 
-									<Form.Group className="mb-5">
+									<Form.Group className="mb-4">
 										<Form.Label className="cyber-label">
 											<span className="label-icon">🔐</span>
 											Password
@@ -92,28 +81,38 @@ function LoginPage({ onLogin }) {
 										<div className="input-glow"></div>
 									</Form.Group>
 
-									<div className="d-grid gap-3">
-										<Button type="submit" className="cyber-btn-login-main">
-											<span className="btn-icon pulse-icon">🚀</span>
-											<span className="btn-text glitch-text" data-text="LOGIN">
-												LOGIN
-											</span>
-											<div className="btn-particles"></div>
-										</Button>
+									<Form.Group className="mb-5">
+										<Form.Label className="cyber-label">
+											<span className="label-icon">🔐</span>
+											Confirm Password
+										</Form.Label>
+										<Form.Control
+											type="password"
+											placeholder="••••••••"
+											value={confirmPassword}
+											onChange={(e) => setConfirmPassword(e.target.value)}
+											className="cyber-input"
+											required
+										/>
+										<div className="input-glow"></div>
+									</Form.Group>
 
-										<Button type="button" className="cyber-btn-register" onClick={handleRegister}>
+									{/* Submit Button */}
+									<div className="d-grid gap-3">
+										<Button type="submit" className="cyber-btn-register">
 											<span className="btn-icon pulse-icon">⚡</span>
-											<span className="btn-text glitch-text" data-text="CREATE ACCOUNT">
-												CREATE ACCOUNT
+											<span className="btn-text glitch-text" data-text="REGISTER">
+												REGISTER
 											</span>
 											<div className="btn-particles"></div>
 										</Button>
 									</div>
 								</Form>
 
+								{/* Footer Link */}
 								<div className="text-center mt-4">
-									<Link to="/" className="cyber-link">
-										← Back to Home
+									<Link to="/login" className="cyber-link">
+										← Back to Login
 									</Link>
 								</div>
 							</Card.Body>
@@ -125,4 +124,4 @@ function LoginPage({ onLogin }) {
 	);
 }
 
-export default LoginPage;
+export default RegisterPage;

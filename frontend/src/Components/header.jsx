@@ -11,6 +11,14 @@ function Header() {
 	return (
 		<Navbar expand="lg" className="cyber-header">
 			<div className="header-glow"></div>
+
+			{/* Kompakter Login Button oben rechts */}
+			<div className="position-absolute top-0 end-0 p-3">
+				<Button as={Link} to="/login" className="cyber-btn-mini cyber-btn-login-mini">
+					<span className="btn-icon">👤</span>
+				</Button>
+			</div>
+
 			<Container className="d-flex justify-content-between align-items-center position-relative">
 				{/* Left: Search Button */}
 				<Nav>
