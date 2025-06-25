@@ -43,6 +43,7 @@ function SearchPage() {
 	};
 
 	return (
+		
 		<div className="cyber-search-page">
 			<div className="particle-field">
 				<div className="particle"></div>
@@ -53,6 +54,8 @@ function SearchPage() {
 				<div className="particle"></div>
 			</div>
 			<div className="scan-lines"></div>
+			<a href="http://127.0.0.1:8080/api/spotify/login">Login mit Spotify</a>
+
 
 			<Container className="text-center position-relative">
 				<div className="title-container mb-5">
