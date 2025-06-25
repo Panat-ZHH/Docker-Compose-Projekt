@@ -1,14 +1,11 @@
 FROM mariadb:latest
 
-# Environment variables are better set in docker-compose.yaml
-# as they're already defined there
-
-# Copy initialization SQL script
+# SQL-Init-Skript kopieren
 COPY init.sql /docker-entrypoint-initdb.d/
 
-# Expose MySQL port
+# MariaDB-Port freigeben
 EXPOSE 3306
 
-# Custom healthcheck that works more reliably
+# Healthcheck anpassen (Host auf 'localhost' bleibt okay hier, weil der Healthcheck im Container läuft)
 HEALTHCHECK --interval=5s --timeout=5s --retries=3 \
     CMD mysqladmin ping -h localhost -u root -proot || exit 1

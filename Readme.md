@@ -5,29 +5,36 @@
 Kurze Beschreibung des Projekts:
 
 - Was soll das Projekt machen?
-  - Api abfragen auf: Spotify API + Soundcloud API
-  - Nutzer können sich einloggen, ihre persönlichen Playlists abrufen und verwalten
-  - Songs können über eine Suchfunktion (Spotify API) gefunden und geliked werden
-  - Gelikete Songs werden dem Benutzer zugeordnet und einer gewählten Playlist hinzugefügt
+
+  - Songs über eine Suchfunktion abfragen (z.B. Deezer API)
+  - Die abgefragten Songs werden in der eigenen Datenbank gespeichert
+  - Nutzer können sich registrieren und einloggen
+  - Nutzer können Songs aus der eigenen Datenbank als Favoriten markieren
+  - Favoriten werden dem Nutzer zugeordnet und persistent gespeichert
+  - Suchfunktion läuft auf der eigenen Datenbank (lokaler Cache der API-Daten)
+
 - Welches Problem wird gelöst?
-  - Beides in 1er App
-  - Persönliches Musikmanagement über mehrere Plattformen
+
+  - Vermeidung von CORS-Problemen durch Backend als Proxy
+  - Persistente Speicherung der Lieblingssongs jedes Nutzers
+  - Unabhängigkeit von der externen API nach erstmaligem Abruf
+  - Einfache, zentrale Musikverwaltung für Nutzer
+
 - Wer ist die Zielgruppe?
-  - Musikhörer
+  - Musikinteressierte Nutzer, die Songs suchen und Favoriten verwalten wollen
 
 ---
 
 ## 🎯 Ziele
 
-- Apis einbinden
-- Endpunkte machen
-- Frontend gestaltung  
-  { - Login }  
-  { - Register }  
-  { - Favorit Songs }  
-  { - Playlist-Auswahl }  
-  { - Songsuche (Spotify API) }  
-  { - Song zu Playlist hinzufügen }
+- Backend mit Spring Boot für CRUD-Operationen und API-Integration
+- Datenbank (MariaDB) als persistenter Speicher für Songs und Favoriten
+- Frontend mit React + Vite + MUI für User-Interaktion
+- Docker Multi-Stage Builds für Frontend und Backend, sowie Docker-Compose Setup
+- Nutzer-Authentifizierung (Register/Login)
+- Suchfunktion, die zuerst die eigene DB abfragt und bei Bedarf externe API anfragt
+- Favoritenverwaltung pro Nutzer
+- CI/CD Pipeline mit Github Actions inklusive E2E-Tests
 
 ---
 
@@ -37,16 +44,15 @@ Kurze Beschreibung des Projekts:
 | ----------------- | --------------------------------- |
 | Panat Ruangsri    | Frontend / Backend + Scrum Master |
 | Timo Eichenberger | Frontend / Backend / Slave        |
-|                   |                                   |
 
 ---
 
 ## 🧱 Technischer Stack
 
-- **Programmiersprache:** HTML, CSS, JS, Crud
-- **Frameworks:** React Vite
-- **Tools:** Docker, GitHub, VS Code, Zed
+- **Programmiersprache:** Java (Backend), TypeScript/JavaScript (Frontend)
+- **Frameworks:** Spring Boot (Backend), React mit Vite und MUI (Frontend)
 - **Datenbank:** MariaDB
+- **Tools:** Docker, Docker Compose, GitHub Actions, VS Code
 
 ---
 
@@ -55,7 +61,7 @@ Kurze Beschreibung des Projekts:
 ```bash
 .github/
 ├─ workflows
-   ├─ /main.yaml
+   ├─ main.yaml
 frontend/
 ├─ Dockerfile
 ├─ package.json

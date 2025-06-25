@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/logo.png';
-import './Header.css'; // Custom CSS für zusätzliche Styles
+import './header.css'; // Custom CSS für zusätzliche Styles
 
 function Header() {
 	return (

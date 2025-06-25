@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-import './SearchPage.css';
+import './searchPage.css';
 
 function SearchPage() {
 	const [searchValue, setSearchValue] = useState('');
