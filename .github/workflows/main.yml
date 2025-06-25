@@ -18,18 +18,18 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build and start containers
-        run: docker-compose -f docker-compose.yaml up -d --build
+        run: docker compose -f docker-compose.yaml up -d --build
 
       - name: Check backend container status
         run: |
-          status=$(docker inspect -f '{{.State.Running}}' $(docker-compose ps -q backend))
+          status=$(docker inspect -f '{{.State.Running}}' $(docker compose ps -q backend))
           if [ "$status" != "true" ]; then
             echo "Backend container is not running!"
-            docker-compose logs backend
+            docker compose logs backend
             exit 1
           fi
           echo "Backend container is running."
 
       - name: Tear down containers
         if: always()
-        run: docker-compose down
+        run: docker compose down
