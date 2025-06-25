@@ -11,7 +11,7 @@ function App() {
 
 	// Geschützte Route Komponente inline
 	const ProtectedRoute = ({ children }) => {
-		if (!isLoggedIn) {
+		if (isLoggedIn) {
 			return <Navigate to="/login" replace />;
 		}
 		return children;

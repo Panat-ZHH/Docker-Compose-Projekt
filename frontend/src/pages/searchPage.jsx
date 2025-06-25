@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -19,43 +19,22 @@ function SearchPage() {
 		setResults([]);
 
 		try {
-			const res = await fetch(`https://api.deezer.com/search?q=${encodeURIComponent(searchValue)}`, {
-				headers: {
-					Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-					'Accept-Language': 'de,de-DE;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,de-CH;q=0.5',
-					'Cache-Control': 'max-age=0',
-					'User-Agent':
-						'Mozilla/5.0 (Linux; Android 6.0; Nexus 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36 Edg/137.0.0.0',
-					// weitere Header nach Bedarf:
-					'Sec-Ch-Ua': '"Microsoft Edge";v="137", "Chromium";v="137", "Not/A)Brand";v="24"',
-					'Sec-Ch-Ua-Mobile': '?1',
-					'Sec-Ch-Ua-Platform': '"Android"',
-					'Sec-Fetch-Dest': 'document',
-					'Sec-Fetch-Mode': 'navigate',
-					'Sec-Fetch-Site': 'none',
-					'Sec-Fetch-User': '?1',
-					'Upgrade-Insecure-Requests': '1',
-					// Cookies können dupliziert werden, falls nötig:
-					Cookie: 'dzr_uniq_id=...; arl=...; jwt=...; jwt-Deezer=...; refresh-token=...; refresh-token-Deezer=...; ...',
-				},
-				credentials: 'include', // damit Cookies mitgesendet werden
-			});
-
+			const res = await fetch(`http://localhost:8080/api/spotify/search?query=${encodeURIComponent(searchValue)}`);
 			const data = await res.json();
 
-			if (data.error) {
-				throw new Error(data.error.message);
+			if (!Array.isArray(data)) {
+				throw new Error("Unerwartetes Format");
 			}
 
-			setResults(data.data);
+			setResults(data);
 		} catch (err) {
+			console.error(err);
 			setError('Fehler beim Laden der Suchergebnisse.');
 		} finally {
 			setLoading(false);
 		}
 	};
 
-	// Optional: Suche auslösen, wenn Enter gedrückt wird
 	const handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
 			e.preventDefault();
@@ -125,18 +104,17 @@ function SearchPage() {
 					{error && <p className="text-danger">{error}</p>}
 					{results.length > 0 && (
 						<div className="results-grid">
-							{results.map((track) => (
-								<div key={track.id} className="result-card text-light border p-3 mb-3 bg-dark rounded">
-									<img src={track.album.cover_small} alt={track.title} className="mb-2" />
-									<h5>{track.title}</h5>
-									<p>{track.artist.name}</p>
+							{results.map((track, index) => (
+								<div key={index} className="result-card text-light border p-3 mb-3 bg-dark rounded">
+									<h5>{track.name}</h5>
+									<p>{track.artist}</p>
 									<a
-										href={track.link}
+										href={track.url}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="btn btn-sm btn-primary mt-2"
+										className="btn btn-sm btn-success mt-2"
 									>
-										Play on Deezer
+										Play on Spotify
 									</a>
 								</div>
 							))}
@@ -151,3 +129,4 @@ function SearchPage() {
 }
 
 export default SearchPage;
+// Note: This code assumes you have a backend API running at http://localhost:8080/api/spotify/search
