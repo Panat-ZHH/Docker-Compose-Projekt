@@ -3,14 +3,16 @@ package com.soundify.backend;
 import jakarta.persistence.*;
 
 @Entity
-public class Song {
+public class Favorite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-    private String artist;
-    private int duration;
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Song song;
 
 }

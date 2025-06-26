@@ -1,6 +1,0 @@
-@import './loginPage.css'; /* Optional: Vererbung von Styles */
-
-/* Optional: Nur Anpassungen speziell für die Registrierungsseite */
-.cyber-title .glitch-title::after {
-	content: 'REGISTER';
-}
